@@ -71,7 +71,7 @@ const LoginPage = () => {
             </button>
           </form>
 
-            <div className="flex justify-start text-gray-700 pt-3 text-xs">
+            <div className="flex justify-start text-center text-gray-700 pt-3 text-xs">
               Continue with
             </div>
             <hr class="h-px mb-4 bg-gray-200 border-0"></hr>
