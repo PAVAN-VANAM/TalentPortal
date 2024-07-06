@@ -1,59 +1,49 @@
 import React from 'react';
-
+import Navbar from './Navbar';
 const Dashboard = () => {
-  const profiles = [
-    { name: 'Nikhilesh Kala', role: 'Software Engineer', location: 'Hyderabad', alumni: '1-1 Alumni' },
-    { name: 'Sumathi UK', role: 'Frontend Developer', location: 'Pune' },
-    { name: 'Bhairava Etti', role: 'Product Manager', location: 'Mumbai' },
-    { name: 'Uday Kiran M', role: 'MERN Stack', location: 'Hyderabad' },
-    { name: 'Tarun Vuppala', role: 'Software Engineer', location: 'Hyderabad' },
-    { name: 'Madhav Madupu', role: 'Frontend Developer', location: 'Pune' },
-    { name: 'Ashwathama', role: 'Product Manager', location: 'Mumbai' },
-    { name: 'Mayuri P', role: 'MERN Stack', location: 'Hyderabad' },
-  ];
-
+  
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Talent Portal</h1>
-          <nav className="space-x-4">
-            <a href="#" className="text-gray-600">Home</a>
-            <a href="#" className="text-gray-600">Companies</a>
-            <a href="#" className="text-gray-600">About</a>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <input type="text" placeholder="Search here..." className="px-4 py-2 border rounded-full focus:outline-none"/>
-            <div className="flex items-center space-x-2">
-              <span>Alex Carry</span>
-              <img src="https://via.placeholder.com/40" alt="User" className="w-10 h-10 rounded-full"/>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar/>
       <main className="container mx-auto px-4 py-8">
-        <section className="flex justify-between items-center mb-8 bg-white p-4 rounded-lg shadow-md">
-          <div>
-            <h2 className="text-lg font-bold text-gray-700">Get Connect with <span className="text-blue-600">Top Companies</span></h2>
+
+        <section className="flex justify-between items-center mb-5 bg-white p-4  pr-16 rounded-lg shadow-lg ">
+
+          <div className='flex flex-col p-2 pl-5 gap-1'>
+            <h2 className=" text-2xl font-normal text-gray-700">Get Connect with </h2>
+            <h2 className=" text-blue-600 text-3xl font-bold ">Top Companies</h2>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-bold">15 LPA</span>
-              <span>Highest Package</span>
+
+           <div className='flex items-center gap-36'>
+            <div className='flex flex-row'>
+              <img src="https://th.bing.com/th/id/OIP.os6u16vK_wxVOkMopaXiVAHaHt?w=182&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="doneimage" className='pt-2 pr-4 w-[60px] h-[50px]'/>
+              <div className='flex flex-col'>
+                <h2 className=" text-2xl font-bold">15LPA</h2>
+                <h2 className=' text-lg text-gray-700'>Highest Package</h2>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-bold">Alumini</span>
-              <span>Connect</span>
+            
+            <div className='flex flex-row'>
+              <img src="https://th.bing.com/th/id/OIP.a6QMa9u89TQSuOkYDjh9TwHaHa?w=215&h=215&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="doneimage" className='pt-2 pr-4 w-[70px] h-[60px]'/>
+              <div className='flex flex-col'>
+                <h2 className=" text-2xl font-bold">Alumini</h2>
+                <h2 className=' text-lg text-gray-700'>Connect</h2>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-bold">Highly Rated</span>
-              <span>among Students</span>
+
+            <div className='flex flex-col items-center justify-center'>
+              <h2 className=" text-2xl font-bold">Highly Rated</h2>
+              <img src="https://westsidehaircare.com/wp-content/uploads/2020/09/5stars-495x95.gif" alt="doneimage" className='pt-2 pr-4 w-[150px] h-[30px]'/>
+              <h2 className=' text-lg text-gray-700'> for Students</h2>
             </div>
           </div>
+         
         </section>
-        <section className="flex justify-between items-start">
-          <aside className="w-1/4 bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-lg font-bold mb-4">Filter by</h3>
+
+        <section className="flex">
+          <aside className="w-1/5 bg-white p-8 rounded-lg shadow-md">
+          <input type="text" id="filterInput" className="border rounded-xl px-2 py-1 mb-5" placeholder="Filter by"/>
+
             <div className="mb-4">
               <h4 className="text-gray-700">Experience</h4>
               <div className="flex flex-col space-y-2">
@@ -106,24 +96,8 @@ const Dashboard = () => {
               </div>
             </div>
           </aside>
-          <section className="w-3/4 bg-white p-4 rounded-lg shadow-md">
-            <div className="flex justify-between items-center mb-4">
-              <input type="text" placeholder="Search by College, City or Name..." className="w-2/3 px-4 py-2 border rounded-full focus:outline-none"/>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-full">Find Profiles</button>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {profiles.map((profile, index) => (
-                <div key={index} className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
-                  <img src="https://via.placeholder.com/80" alt={profile.name} className="w-20 h-20 rounded-full mb-2"/>
-                  <h4 className="text-lg font-bold">{profile.name}</h4>
-                  <span>{profile.role}</span>
-                  <span>{profile.location}</span>
-                  <button className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-full">View Profile</button>
-                </div>
-              ))}
-            </div>
-          </section>
         </section>
+        
       </main>
     </div>
   );
