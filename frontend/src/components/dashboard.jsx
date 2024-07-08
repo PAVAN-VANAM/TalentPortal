@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
+import Profilepage from './profilepage';
 const Dashboard = () => {
   
   return (
@@ -40,8 +41,9 @@ const Dashboard = () => {
          
         </section>
 
-        <section className="flex">
-          <aside className="w-1/5 bg-white p-8 rounded-lg shadow-md">
+<div className='flex justify-between gap-3'>  
+<section className="flex ">
+          <aside className="w-5/5 bg-white p-8 rounded-lg shadow-md">
           <input type="text" id="filterInput" className="border rounded-xl px-2 py-1 mb-5" placeholder="Filter by"/>
 
             <div className="mb-4">
@@ -97,7 +99,8 @@ const Dashboard = () => {
             </div>
           </aside>
         </section>
-        
+        <Profilepage/>
+</div>
       </main>
     </div>
   );

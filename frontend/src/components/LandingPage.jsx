@@ -51,28 +51,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">Start growing with Community</h2>
-        <div className="relative flex justify-center items-center space-x-6">
-          <div className="absolute left-0 top-0 flex flex-col items-center space-y-4">
-            <div className="flex flex-col items-center">
-              <img src="user1.jpg" alt="User 1" className="w-16 h-16 rounded-full mb-2" />
-              <p className="bg-white p-2 rounded shadow-md text-gray-600 max-w-xs">this portal gave me a great opportunities</p>
-            </div>
-            <img src="user2.jpg" alt="User 2" className="w-12 h-12 rounded-full" />
-          </div>
-          <h2 className="text-3xl font-bold text-blue-600">Start growing with Community</h2>
-          <div className="absolute right-0 top-0 flex flex-col items-center space-y-4">
-            <div className="flex flex-col items-center">
-              <img src="user3.jpg" alt="User 3" className="w-16 h-16 rounded-full mb-2" />
-              <p className="bg-white p-2 rounded shadow-md text-gray-600 max-w-xs">I happy to be a part of this portals that help with hiring opportunities</p>
-            </div>
-            <img src="user4.jpg" alt="User 4" className="w-12 h-12 rounded-full" />
-          </div>
-        </div>
-      </div>
-    </section>
+     
 
       <section className="py-12 bg-white flex items-center justify-center">
         <div className="container mx-auto text-center w-[50%]">
@@ -87,8 +66,8 @@ const LandingPage = () => {
       </section>
 
       <footer className="bg-gray-800 py-6">
-        <div className="container mx-auto text-center text-gray-400">
-          <div className="space-x-6 mb-4">
+        <div className="container   mx-auto text-center text-gray-400">
+          <div className="space-x-6 felx  mb-4">
             <a href="#overview" className="hover:text-white">Overview</a>
             <a href="#policy" className="hover:text-white">Privacy Policy</a>
             <a href="#contact" className="hover:text-white">Contact</a>
