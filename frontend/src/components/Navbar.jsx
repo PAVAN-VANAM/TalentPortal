@@ -19,7 +19,7 @@ export default function Navbar() {
                     
                 </div>
                 <div className="relative">
-                    Profile pic
+                    <img className='w-[40px] h-[39px]' src="https://logodix.com/logo/1984127.png" alt="" />
                 </div>
             </div>
         </div>

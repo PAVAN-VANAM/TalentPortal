@@ -44,16 +44,27 @@ const Dashboard = () => {
 <div className='flex justify-between gap-3'>  
 <section className="flex ">
           <aside className="w-5/5 bg-white p-8 rounded-lg shadow-md">
-          <input type="text" id="filterInput" className="border rounded-xl px-2 py-1 mb-5" placeholder="Filter by"/>
+          {/* <input type="text" id="filterInput" className="border rounded-xl px-2 py-1 mb-5" placeholder="Filter by"/> */}
+          <select
+            id="category"
+            name="category"
+            className='border rounded-xl p-2 mb-5 flex bg-transparent text-gray-700 '
+          >
+            <option value="" className='text-gray-700'>Filter by your Choices</option>
+            <option value="personal" className='text-black'>Experienced</option>
+            <option value="work" className='text-black'>Education</option>
+            <option value="home" className='text-black'>Rating</option>
+            <option value="home" className='text-black'>Skills</option>
+          </select>
 
             <div className="mb-4">
-              <h4 className="text-gray-700">Experience</h4>
-              <div className="flex flex-col space-y-2">
+              <h4 className="text-gray-700 mb-4">Experience</h4>
+              <div className="flex flex-col space-y-2 ml-2 mt-2">
                 <label className="flex items-center space-x-2">
                   <input type="checkbox" className="form-checkbox"/>
                   <span>Fresher</span>
                 </label>
-                <label className="flex items-center space-x-2">
+                <label className="flex items-center space-x-2 ">
                   <input type="checkbox" className="form-checkbox"/>
                   <span>Experienced</span>
                 </label>
@@ -64,8 +75,8 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="mb-4">
-              <h4 className="text-gray-700">Filter by Skills</h4>
-              <div className="flex flex-col space-y-2">
+              <h4 className="text-gray-700 mb-4">Filter by Skills</h4>
+              <div className="flex flex-col space-y-2 ml-2 mt-2">
                 <label className="flex items-center space-x-2">
                   <input type="checkbox" className="form-checkbox"/>
                   <span>Web Development</span>
@@ -81,8 +92,8 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="mb-4">
-              <h4 className="text-gray-700">Filter by Education</h4>
-              <div className="flex flex-col space-y-2">
+              <h4 className="text-gray-700 mb-4">Filter by Education</h4>
+              <div className="flex flex-col space-y-2 ml-2 mt-2">
                 <label className="flex items-center space-x-2">
                   <input type="checkbox" className="form-checkbox"/>
                   <span>UnderGraduates</span>
