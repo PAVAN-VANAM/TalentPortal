@@ -8,7 +8,7 @@ export default function Navbar() {
             <div className="flex items-center space-x-4">
                 <h1 className="text-3xl pr-10 font-bold text-blue-600">Talent Portal</h1>
                 <nav className="space-x-4">
-                    <a href="#" className="text-lg text-gray-700 hover:text-blue-600">Home</a>
+                    <a href='./dashboard' className="text-lg text-gray-700 hover:text-blue-600">Home</a>
                     <a href="#" className="text-lg text-gray-700 hover:text-blue-600">Companies</a>
                     <a href="#" className="text-lg text-gray-700 hover:text-blue-600">About</a>
                 </nav>
