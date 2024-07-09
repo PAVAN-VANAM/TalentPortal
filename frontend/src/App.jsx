@@ -8,8 +8,6 @@ import LandingPage from './components/LandingPage'
 import Dashboard from './components/dashboard'
 
 function App() {
-  
-
   return (
     <>
     <Router>
@@ -21,9 +19,7 @@ function App() {
         </Routes>
         </Router>
 
-      
     </>
   )
 }
-
 export default App

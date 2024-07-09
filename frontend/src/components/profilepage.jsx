@@ -26,7 +26,7 @@ function Profilepage() {
           <input type="text" placeholder="Search by College, City or Name..." className="w-3/4 px-8 py-2 border rounded-full focus:outline-none" />
           <button className="px-16 py-2 mr-2 bg-blue-600 text-white rounded-full">Find Profiles</button>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 overflow-auto h-[550px]">
           {profiles.map((profile, index) => (
             <div>
               <div key={index} className="bg-gray-50 p-4 rounded-lg shadow-md ">

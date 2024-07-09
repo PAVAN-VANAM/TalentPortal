@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
-
+import Testimonials from './Testimonals';
+import '../assets/circle-scatter-haikei.png'
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -51,12 +52,13 @@ const LandingPage = () => {
         </div>
       </section>
 
-     
+      {/* <div><Testimonials/></div> */}
+    
 
-      <section className="py-12 bg-white flex items-center justify-center">
-        <div className="container mx-auto text-center w-[50%]">
-          <h2 className="text-5xl w-[70%] text-center font-bold text-gray-800 p-5">Hire the Skilled students you need</h2>
-          <p className="text-gray-600 mt-4">
+      <section className=" bg-white flex items-center justify-between">
+        <div className="container flex flex-col justify-center items-center text-center px-2 w-[50%]">
+          <h2 className="text-6xl w-[70%] text-center font-bold text-gray-800 p-5">Hire the Skilled students you need</h2>
+          <p className="text-gray-600 w-[70%] mt-4">
             We provide the profiles of the skilled students that help to decrease your hiring time.
           </p>
         </div>
