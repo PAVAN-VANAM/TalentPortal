@@ -16,13 +16,13 @@ const ProfileForm = () => {
       country: '',
     },
     yearsOfExperience: '',
-    education: {
+    education:[ {
       instituteName: '',
       courseName: '',
       branch: '',
       yearOfPassing: '',
       grade: '',
-    },
+    }],
     socialMediaProfiles: [
       { linkedIn: '', Github: '', emailId: '' }
     ],
@@ -52,7 +52,15 @@ const ProfileForm = () => {
 
     setProfile(newProfile);
   };
-
+  const handleAddEducation = () => {
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      education: [
+        ...prevProfile.education,
+        { instituteName: '', courseName: '', branch: '', yearOfPassing: '', grade: '' },
+      ],
+    }));
+  };
   const handleAddTechStack = () => {
     setProfile({
       ...profile,
@@ -237,66 +245,64 @@ const ProfileForm = () => {
 
       <fieldset className="mb-4">
         <legend className="text-lg font-semibold text-gray-700">Education</legend>
-
-        <div className="mb-4">
-          <label className="block text-gray-700">Institute Name:</label>
-          <input
-            type="text"
-            name="education.instituteName"
-            value={profile.education.instituteName}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700">Course Name:</label>
-          <input
-            type="text"
-            name="education.courseName"
-            value={profile.education.courseName}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700">Branch:</label>
-          <input
-            type="text"
-            name="education.branch"
-            value={profile.education.branch}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700">Year of Passing:</label>
-          <input
-            type="date"
-            name="education.yearOfPassing"
-            value={profile.education.yearOfPassing}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700">Grade:</label>
-          <input
-            type="text"
-            name="education.grade"
-            value={profile.education.grade}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-          />
-        </div>
+        {profile.education.map((edu, index) => (
+          <div key={index} className="mb-4">
+            <label className="block text-gray-700">Institute Name:</label>
+            <input
+              type="text"
+              name={`education.${index}.instituteName`}
+              value={edu.instituteName}
+              onChange={(e) => handleEducationChange(index, 'instituteName', e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <label className="block text-gray-700">Course Name:</label>
+            <input
+              type="text"
+              name={`education.${index}.courseName`}
+              value={edu.courseName}
+              onChange={(e) => handleEducationChange(index, 'courseName', e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <label className="block text-gray-700">Branch:</label>
+            <input
+              type="text"
+              name={`education.${index}.branch`}
+              value={edu.branch}
+              onChange={(e) => handleEducationChange(index, 'branch', e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <label className="block text-gray-700">Year of Passing:</label>
+            <input
+              type="date"
+              name={`education.${index}.yearOfPassing`}
+              value={edu.yearOfPassing}
+              onChange={(e) => handleEducationChange(index, 'yearOfPassing', e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            <label className="block text-gray-700">Grade:</label>
+            <input
+              type="text"
+              name={`education.${index}.grade`}
+              value={edu.grade}
+              onChange={(e) => handleEducationChange(index, 'grade', e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+            {index === profile.education.length - 1 && (
+              <button
+                type="button"
+                onClick={handleAddEducation}
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
+              >
+                Add Education
+              </button>
+            )}
+          </div>
+        ))}
       </fieldset>
 
       <fieldset className="mb-4">
@@ -457,7 +463,7 @@ const ProfileForm = () => {
   <label className="block text-gray-700">Upload Profile Image:</label>
   <input
     type="file"
-    name="image"
+    name="profileimage"
     accept="image/jpeg, image/jpg, image/png"
     onChange={(e) => {
       const file = e.target.files[0];
