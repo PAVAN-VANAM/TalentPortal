@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 export default function Navbar() {
   return (
     <div className='sticky top-0'>
@@ -7,21 +7,13 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-2 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <h1 className="text-3xl pr-10 font-bold text-blue-600">Talent Portal</h1>
-                <nav className="space-x-4">
+                {/* <nav className="space-x-4">
                     <a href='./dashboard' className="text-lg text-gray-700 hover:text-blue-600">Home</a>
                     <a href="#" className="text-lg text-gray-700 hover:text-blue-600">Companies</a>
                     <a href="#" className="text-lg text-gray-700 hover:text-blue-600">About</a>
-                </nav>
+                </nav> */}
             </div>
-            <div className="flex items-center space-x-4">
-                <div className="relative">
-                    <input type="text" className="border rounded-2xl px-4 py-2" placeholder="Search here..."/>
-                    
-                </div>
-                <div className="relative">
-                    <img className='w-[40px] h-[39px]' src="https://logodix.com/logo/1984127.png" alt="" />
-                </div>
-            </div>
+            <Link className=' border text-2xl'>Login</Link>
         </div>
     </header>
     </div>

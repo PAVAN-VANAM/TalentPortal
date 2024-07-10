@@ -6,20 +6,11 @@ import SignupPage from './components/Signup'
 import LandingPage from './components/LandingPage'
 import Dashboard from './components/dashboard'
 import {NextUIProvider} from "@nextui-org/system";
-
+import ProfileForm from './components/ProfileForm'
 function App() {
   return (
     <>
-<NextUIProvider>
-    <Router>
-      <Routes>
-        <Route path='/' index element={<LandingPage/>}/>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path='/signup' element={<SignupPage/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        </Routes>
-        </Router>
-        </NextUIProvider>
+     <ProfileForm/>
     </>
   )
 }

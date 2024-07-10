@@ -2,9 +2,10 @@ import React from 'react';
 import Navbar from './Navbar';
 import Testimonials from './Testimonals';
 import '../assets/circle-scatter-haikei.png'
+import { Link } from 'react-router-dom';
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen inter bg-gray-100">
       <Navbar/>
 
       <section className="bg-white  flex">
@@ -16,8 +17,8 @@ const LandingPage = () => {
             Discover opportunities that match your unique skills. Join our community and connect with top employers today.
           </p>
           <div className="mt-6">
-            <button className="bg-blue-600 text-white py-2 px-4 rounded mr-2 hover:bg-blue-500">Get Started</button>
-            <button className="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 rounded hover:bg-blue-100">Know More</button>
+            <Link to='/dashboard' className="bg-blue-600 text-white py-2 px-4 rounded mr-2 hover:bg-blue-500">Get Profiles</Link>
+            <button className="bg-transparent border border-blue-600 text-blue-600 py-2 px-4 rounded hover:bg-blue-100">Tie UP</button>
           </div>
         </div>
         <div className='w-[50%]'>
@@ -43,7 +44,7 @@ const LandingPage = () => {
             <img src="https://i.pinimg.com/originals/8f/d8/eb/8fd8eb59bb027e607c6d14cdff1812eb.png" alt="Illustration" className="w-3/4" />
           </div>
           <div className="lg:w-1/2 p-12">
-            <h2 className="text-3xl font-bold text-gray-800 p-6 text-center">Empower your workforce with Talent Portal</h2>
+            <h2 className="text-3xl font-bold text-gray-800 p-2 text-center">Empower your workforce with Talent Portal</h2>
             <p className="text-gray-600 mt-4 px-12 text-center">
               The seamless solution to discover, connect, and recruit top talent effortlessly, enhancing your hiring process and ensuring the best candidates for your company's success.
             </p>
