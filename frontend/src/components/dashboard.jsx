@@ -1,11 +1,11 @@
 
-import Navbar from './Navbar';
+import Dashboardnavbar from './Dashboardnavbar';
 import Profilepage from './profilepage';
 const Dashboard = () => {
   
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar/>
+      <Dashboardnavbar/>
       <main className="container mx-auto px-20 py-8">
 
         <section className="flex justify-between items-center mb-5 bg-white p-4  pr-16 rounded-lg shadow-lg ">
