@@ -61,6 +61,13 @@ const ProfileForm = () => {
       ],
     }));
   };
+  const handleEducationChange = (index, key, value) => {
+    const newEducation = profile.education.map((edu, i) =>
+      i === index ? { ...edu, [key]: value } : edu
+    );
+    setProfile({ ...profile, education: newEducation });
+  };
+
   const handleAddTechStack = () => {
     setProfile({
       ...profile,

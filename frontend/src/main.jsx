@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard'
 import App from './App'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginPage from './components/Login'
 
 const r=createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const r=createBrowserRouter([
     path:'/profile-form',
     element:<App/>
   },
+  {
+    path: '/login',
+    element: <LoginPage/>,
+  }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

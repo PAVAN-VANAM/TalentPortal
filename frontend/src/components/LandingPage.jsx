@@ -5,7 +5,7 @@ import '../assets/circle-scatter-haikei.png'
 import { Link } from 'react-router-dom';
 const LandingPage = () => {
   return (
-    <div className="min-h-screen inter bg-gray-100">
+    <div className="min-h-screen  bg-gray-100">
       <Navbar/>
 
       <section className="bg-white  flex">

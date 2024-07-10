@@ -13,7 +13,7 @@ export default function Navbar() {
                     <a href="#" className="text-lg text-gray-700 hover:text-blue-600">About</a>
                 </nav> */}
             </div>
-            <Link className=' border text-2xl'>Login</Link>
+            <Link to='/login'>Login</Link>
         </div>
     </header>
     </div>
