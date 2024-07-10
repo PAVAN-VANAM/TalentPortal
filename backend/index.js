@@ -3,6 +3,8 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 // database imports
 const User = require("./models/user");
@@ -10,7 +12,14 @@ const User = require("./models/user");
 dotenv.config({ path: "./.env" });
 const port = process.env.PORT;
 
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow only from this origin
+  })
+);
+
 app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
@@ -70,6 +79,46 @@ app.put("/api/users/:userid", async (req, res) => {
   }
 });
 
+// Data Of Profiles
+
+app.get("/post", async (req, res) => {
+  try {
+    // Fetch all users from the database using the User model
+    const users = await User.find();
+
+    // Send the users as a response in JSON format
+    res.json(users);
+  } catch (error) {
+    // Handle any errors that might occur during the database query
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Error fetching users" });
+  }
+});
+
+// login Authorization Service End point
+app.post("/api/login", async (req, res) => {
+  //Authorization User after it done by Authetication
+
+  const { email, password } = req.body;
+
+  const ExistUser = { email: email, password: password };
+
+  const accessToken = jwt.sign(ExistUser, process.env.ACCESS_TOKEN);
+
+  res.json({ accessToken: accessToken });
+});
+
+function AutheticationToken(req, res, next) {
+  const authHeader = req.headers["Authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
 
 app.listen(port, () => {
   console.log(`server listening on ${port}`);
