@@ -5,9 +5,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
 // database imports
 const User = require("./models/user");
+const Profile = require("./models/Profile");
 
 dotenv.config({ path: "./.env" });
 const port = process.env.PORT;
@@ -18,19 +20,23 @@ app.use(
   })
 );
 
+// MiddleWare
 app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
+//Basic root api
 app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
+// MongoDB Connection
 const dbURI = process.env.DB_URL;
 mongoose
   .connect(dbURI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB connection error: " + err));
 
+// create a new database USer
 app.post("/api/user", async (req, res) => {
   try {
     const { name, email, password, usertype, active } = req.body;
@@ -79,15 +85,101 @@ app.put("/api/users/:userid", async (req, res) => {
   }
 });
 
+// Upload files
+
+// Create storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    return cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+const upload = multer({ storage });
+
+// POST endpoint to upload image and create a new profile
+app.post(
+  "/api/new-profile",
+  async (req, res) => {
+    console.log(req.body);
+
+    try {
+      const {
+        name,
+        designation,
+        address,
+        yearsOfExperience,
+        education,
+        socialMediaProfiles,
+        user_rating,
+        testimonials,
+        techStack,
+        reviews,
+        workExperience,
+      } = req.body;
+
+      const newProfileData = {
+        name,
+        designation,
+        address,
+        yearsOfExperience,
+        education,
+        socialMediaProfiles,
+        user_rating,
+        testimonials,
+        techStack,
+        reviews,
+        workExperience,
+      };
+      /* if (req.file) {
+        newProfileData.imageId = req.file.filename; // Add imageId to the profile data
+      } */
+
+      console.log("Profile :", newProfileData);
+
+      const newProfile = new Profile(newProfileData); // Pass newProfileData directly
+      await newProfile.save();
+      res.status(201).send(newProfile);
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
+);
+
+
+
+
+// GET endpoint to retrieve image
+app.get("/file/:filename", (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: "No file exists",
+      });
+    }
+    // Check if image
+    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+      // Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: "Not an image",
+      });
+    }
+  });
+});
+
 // Data Of Profiles
 
 app.get("/post", async (req, res) => {
   try {
     // Fetch all users from the database using the User model
-    const users = await User.find();
+    const profiles = await Profile.find();
 
     // Send the users as a response in JSON format
-    res.json(users);
+    res.json(profiles);
   } catch (error) {
     // Handle any errors that might occur during the database query
     console.error("Error fetching users:", error);

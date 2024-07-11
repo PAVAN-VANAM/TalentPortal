@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import { useState } from 'react';
+import axios from 'axios';
 const ProfileForm = () => {
   const [profile, setProfile] = useState({
     name: '',
@@ -95,10 +95,46 @@ const ProfileForm = () => {
     setProfile({ ...profile, workExperience: newWorkExperience });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add submit logic here (e.g., sending data to a server)
-    console.log(profile);
+    
+    // Create a FormData object to handle the image file
+    const formData = new FormData();
+    
+    // Append other profile data to the formData
+    for (const key in profile) {
+      if (key === 'image') {
+        if (profile[key]) formData.append('profileimage', profile[key]);
+      } else if (typeof profile[key] === 'object' && !Array.isArray(profile[key])) {
+        for (const nestedKey in profile[key]) {
+          formData.append(`${key}.${nestedKey}`, profile[key][nestedKey]);
+        }
+      } else if (Array.isArray(profile[key])) {
+        profile[key].forEach((item, index) => {
+          if (typeof item === 'object') {
+            for (const nestedKey in item) {
+              formData.append(`${key}[${index}].${nestedKey}`, item[nestedKey]);
+            }
+          } else {
+            formData.append(`${key}[${index}]`, item);
+          }
+        });
+      } else {
+        formData.append(key, profile[key]);
+      }
+    }
+
+    try {
+      const res = await axios.post('http://localhost:3001/api/new-profile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Profile created successfully:', res.data);
+    } catch (error) {
+      console.error('Error creating profile:', error.message);
+    }
   };
 
   return (
