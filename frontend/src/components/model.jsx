@@ -1,35 +1,63 @@
 
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-
-export default function Models() {
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,Button, useDisclosure} from "@nextui-org/react";
+import { FaBriefcase, FaMapMarkerAlt, FaStar, FaStarHalf,FaSchool } from 'react-icons/fa';
+const Models = ({ name, rating, designation, address, education, workExperience,testimonials }) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+ 
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+    
+    return (
+      <div className="flex items-center">
+        {[...Array(fullStars)].map((_, i) => (
+          <FaStar key={i} className="text-yellow-500" />
+        ))}
+        {halfStar && <FaStarHalf className="text-yellow-500" />}
+        {[...Array(emptyStars)].map((_, i) => (
+          <FaStar key={i} className="text-gray-300" />
+        ))}
+      </div>
+    );
+  };
   return (
     <>
-      <Button onPress={onOpen}>Open Modal</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
+      <Button onPress={onOpen} className=" bg-gray-50 text-primary-600"
+             >view profile</Button>
+      <Modal className="absolute right-0 h-full bg-primary-50 rounded-none translate-x-5 w-full" isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent >
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Profile Details</ModalHeader>
               <ModalBody>
-                <p> 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                  Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                  proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <div className="flex justify-around items-center">
+                  <img src="https://randomuser.me/api/portraits/women/2.jpg" className="rounded-full w-34" alt="Profile" />
+                  <div><h4 className="text-xl font-bold">{name}</h4>
+                  <h4 className="text-xs flex gap-2 items-center text-gray-600"><span><FaBriefcase /></span>{designation}</h4>
+                  <h2 className="text-xs flex items-center gap-2 text-gray-600"><span><FaMapMarkerAlt /></span>{address.city}</h2>
+                  <div className="flex items-center gap-2">
+                    {renderStars(rating)}
+                  </div></div>
+                </div>
+                <hr className="mt-5 border-2 w-full bg-black" />
+                <div className="mt-2">
+                  <h4 className="text-md font-semibold">Education</h4>
+                  {education.map((edu, index) => (
+                    <div key={index} className="text-xs flex gap-2 items-center text-gray-600">
+                      <span><FaSchool /></span>{edu.instituteName} - {edu.courseName}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2">
+                  <h4 className="text-md font-semibold">Work Experience</h4>
+                  {workExperience.map((work, index) => (
+                    <div key={index} className="text-xs flex gap-2 items-center text-gray-600">
+                      <span><FaBriefcase /></span>{work.companyName} - {work.designation}
+                    </div>
+                  ))}
+                </div>
+                
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
@@ -46,3 +74,5 @@ export default function Models() {
     </>
   );
 }
+
+export default Models

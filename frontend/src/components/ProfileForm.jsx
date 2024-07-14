@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+
 const ProfileForm = () => {
   const [profile, setProfile] = useState({
     name: '',
@@ -16,24 +16,30 @@ const ProfileForm = () => {
       country: '',
     },
     yearsOfExperience: '',
-    education:[ {
+    education: [{
       instituteName: '',
       courseName: '',
       branch: '',
       yearOfPassing: '',
       grade: '',
     }],
-    socialMediaProfiles: [
-      { linkedIn: '', Github: '', emailId: '' }
-    ],
+    socialMediaProfiles: [{
+      linkedIn: '', 
+      Github: '', 
+      emailId: '' 
+    }],
     user_rating: '',
     testimonials: '',
     techStack: [''],
     reviews: '',
-    workExperience: [
-      { companyName: '', startDate: '', endDate: '', designation: '', description: '' }
-    ],
-    imageId: '',
+    workExperience: [{
+      companyName: '', 
+      startDate: '', 
+      endDate: '', 
+      designation: '', 
+      description: '' 
+    }],
+    image: null,
   });
 
   const handleChange = (e) => {
@@ -52,6 +58,7 @@ const ProfileForm = () => {
 
     setProfile(newProfile);
   };
+
   const handleAddEducation = () => {
     setProfile((prevProfile) => ({
       ...prevProfile,
@@ -61,6 +68,7 @@ const ProfileForm = () => {
       ],
     }));
   };
+
   const handleEducationChange = (index, key, value) => {
     const newEducation = profile.education.map((edu, i) =>
       i === index ? { ...edu, [key]: value } : edu
@@ -95,46 +103,10 @@ const ProfileForm = () => {
     setProfile({ ...profile, workExperience: newWorkExperience });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Create a FormData object to handle the image file
-    const formData = new FormData();
-    
-    // Append other profile data to the formData
-    for (const key in profile) {
-      if (key === 'image') {
-        if (profile[key]) formData.append('profileimage', profile[key]);
-      } else if (typeof profile[key] === 'object' && !Array.isArray(profile[key])) {
-        for (const nestedKey in profile[key]) {
-          formData.append(`${key}.${nestedKey}`, profile[key][nestedKey]);
-        }
-      } else if (Array.isArray(profile[key])) {
-        profile[key].forEach((item, index) => {
-          if (typeof item === 'object') {
-            for (const nestedKey in item) {
-              formData.append(`${key}[${index}].${nestedKey}`, item[nestedKey]);
-            }
-          } else {
-            formData.append(`${key}[${index}]`, item);
-          }
-        });
-      } else {
-        formData.append(key, profile[key]);
-      }
-    }
-
-    try {
-      const res = await axios.post('http://localhost:3001/api/new-profile', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      console.log('Profile created successfully:', res.data);
-    } catch (error) {
-      console.error('Error creating profile:', error.message);
-    }
+    // Add submit logic here (e.g., sending data to a server)
+    console.log(profile);
   };
 
   return (
@@ -319,7 +291,7 @@ const ProfileForm = () => {
             />
             <label className="block text-gray-700">Year of Passing:</label>
             <input
-              type="date"
+              type="number"
               name={`education.${index}.yearOfPassing`}
               value={edu.yearOfPassing}
               onChange={(e) => handleEducationChange(index, 'yearOfPassing', e.target.value)}
@@ -332,57 +304,50 @@ const ProfileForm = () => {
               name={`education.${index}.grade`}
               value={edu.grade}
               onChange={(e) => handleEducationChange(index, 'grade', e.target.value)}
-              required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
-            {index === profile.education.length - 1 && (
-              <button
-                type="button"
-                onClick={handleAddEducation}
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
-              >
-                Add Education
-              </button>
-            )}
           </div>
         ))}
+        <button
+          type="button"
+          onClick={handleAddEducation}
+          className="text-blue-500"
+        >
+          Add Education
+        </button>
       </fieldset>
 
-      <fieldset className="mb-4">
-        <legend className="text-lg font-semibold text-gray-700">Social Media Profiles</legend>
-
-        {profile.socialMediaProfiles.map((profile, index) => (
-          <div key={index} className="mb-4">
+      <div className="mb-4">
+        <label className="block text-gray-700">Social Media Profiles:</label>
+        {profile.socialMediaProfiles.map((social, index) => (
+          <div key={index}>
             <label className="block text-gray-700">LinkedIn:</label>
             <input
-              type="text"
+              type="url"
               name={`socialMediaProfiles.${index}.linkedIn`}
-              value={profile.linkedIn}
-              onChange={handleChange}
-              required
+              value={social.linkedIn}
+              onChange={(e) => handleChange(e)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
-            <label className="block text-gray-700">Github:</label>
+            <label className="block text-gray-700">GitHub:</label>
             <input
-              type="text"
+              type="url"
               name={`socialMediaProfiles.${index}.Github`}
-              value={profile.Github}
-              onChange={handleChange}
-              required
+              value={social.Github}
+              onChange={(e) => handleChange(e)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
-            <label className="block text-gray-700">Email Id:</label>
+            <label className="block text-gray-700">Email ID:</label>
             <input
-              type="text"
+              type="email"
               name={`socialMediaProfiles.${index}.emailId`}
-              value={profile.emailId}
-              onChange={handleChange}
-              required
+              value={social.emailId}
+              onChange={(e) => handleChange(e)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
           </div>
         ))}
-      </fieldset>
+      </div>
 
       <div className="mb-4">
         <label className="block text-gray-700">User Rating:</label>
@@ -391,18 +356,17 @@ const ProfileForm = () => {
           name="user_rating"
           value={profile.user_rating}
           onChange={handleChange}
+          required
           className="w-full px-3 py-2 border border-gray-300 rounded-lg"
         />
       </div>
 
       <div className="mb-4">
         <label className="block text-gray-700">Testimonials:</label>
-        <input
-          type="text"
+        <textarea
           name="testimonials"
           value={profile.testimonials}
           onChange={handleChange}
-          required
           className="w-full px-3 py-2 border border-gray-300 rounded-lg"
         />
       </div>
@@ -411,6 +375,7 @@ const ProfileForm = () => {
         <legend className="text-lg font-semibold text-gray-700">Tech Stack</legend>
         {profile.techStack.map((tech, index) => (
           <div key={index} className="mb-4">
+            <label className="block text-gray-700">Tech:</label>
             <input
               type="text"
               name={`techStack.${index}`}
@@ -419,17 +384,15 @@ const ProfileForm = () => {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
-            {index === profile.techStack.length - 1 && (
-              <button
-                type="button"
-                onClick={handleAddTechStack}
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
-              >
-                Add Tech
-              </button>
-            )}
           </div>
         ))}
+        <button
+          type="button"
+          onClick={handleAddTechStack}
+          className="text-blue-500"
+        >
+          Add Tech Stack
+        </button>
       </fieldset>
 
       <div className="mb-4">
@@ -444,13 +407,13 @@ const ProfileForm = () => {
 
       <fieldset className="mb-4">
         <legend className="text-lg font-semibold text-gray-700">Work Experience</legend>
-        {profile.workExperience.map((experience, index) => (
+        {profile.workExperience.map((work, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700">Company Name:</label>
             <input
               type="text"
               name="companyName"
-              value={experience.companyName}
+              value={work.companyName}
               onChange={(e) => handleWorkExperienceChange(index, e)}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
@@ -459,7 +422,7 @@ const ProfileForm = () => {
             <input
               type="date"
               name="startDate"
-              value={experience.startDate}
+              value={work.startDate}
               onChange={(e) => handleWorkExperienceChange(index, e)}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
@@ -468,15 +431,16 @@ const ProfileForm = () => {
             <input
               type="date"
               name="endDate"
-              value={experience.endDate}
+              value={work.endDate}
               onChange={(e) => handleWorkExperienceChange(index, e)}
+              required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
             <label className="block text-gray-700">Designation:</label>
             <input
               type="text"
               name="designation"
-              value={experience.designation}
+              value={work.designation}
               onChange={(e) => handleWorkExperienceChange(index, e)}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
@@ -484,43 +448,36 @@ const ProfileForm = () => {
             <label className="block text-gray-700">Description:</label>
             <textarea
               name="description"
-              value={experience.description}
+              value={work.description}
               onChange={(e) => handleWorkExperienceChange(index, e)}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
-            {index === profile.workExperience.length - 1 && (
-              <button
-                type="button"
-                onClick={handleAddWorkExperience}
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
-              >
-                Add Experience
-              </button>
-            )}
           </div>
         ))}
+        <button
+          type="button"
+          onClick={handleAddWorkExperience}
+          className="text-blue-500"
+        >
+          Add Work Experience
+        </button>
       </fieldset>
 
       <div className="mb-4">
-  <label className="block text-gray-700">Upload Profile Image:</label>
-  <input
-    type="file"
-    name="profileimage"
-    accept="image/jpeg, image/jpg, image/png"
-    onChange={(e) => {
-      const file = e.target.files[0];
-      if (file) {
-        setProfile({ ...profile, image: file });
-      }
-    }}
-    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-  />
-</div>
+        <label className="block text-gray-700">Image:</label>
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => setProfile({ ...profile, image: e.target.files[0] })}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
       <button
         type="submit"
-        className="w-full py-3 bg-blue-500 text-white font-bold rounded-lg"
+        className="px-4 py-2 bg-blue-500 text-white rounded-lg"
       >
         Submit
       </button>
