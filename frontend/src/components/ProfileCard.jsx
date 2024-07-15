@@ -5,25 +5,25 @@ import { FaBriefcase, FaMapMarkerAlt, FaStar, FaStarHalf } from 'react-icons/fa'
 // Function to render star rating
 
 
+ const renderStars = (rating) => {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return (
+    <div className="flex items-center">
+      {[...Array(fullStars)].map((_, i) => (
+        <FaStar key={i} className="text-yellow-500" />
+      ))}
+      {halfStar && <FaStarHalf className="text-yellow-500" />}
+      {[...Array(emptyStars)].map((_, i) => (
+        <FaStar key={i} className="text-gray-300" />
+      ))}
+    </div>
+  );
+}; 
 // eslint-disable-next-line react/prop-types
-function ProfileCard({ name, active, usertype, rating, designation, address, education, workExperience,testimonials }) {
-  const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 !== 0;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-  
-    return (
-      <div className="flex items-center">
-        {[...Array(fullStars)].map((_, i) => (
-          <FaStar key={i} className="text-yellow-500" />
-        ))}
-        {halfStar && <FaStarHalf className="text-yellow-500" />}
-        {[...Array(emptyStars)].map((_, i) => (
-          <FaStar key={i} className="text-gray-300" />
-        ))}
-      </div>
-    );
-  };
+function ProfileCard({ name, active, usertype, rating, designation, address, education,techStack, workExperience,testimonials }) {
 
   //  const defaulteducation = education || [];
   //  const defaultworkExperience = workExperience || [];
@@ -35,9 +35,9 @@ function ProfileCard({ name, active, usertype, rating, designation, address, edu
           <h4 className="text-xl font-bold">{name}</h4>
           <h4 className='text-xs flex gap-2 items-center text-gray-600'><span><FaBriefcase /></span>{designation}</h4>
           <h2 className='text-xs flex items-center gap-2 text-gray-600'><span><FaMapMarkerAlt /></span>{address.city}</h2>
-          <div className='flex items-center gap-2'>
+         {/*  <div className='flex items-center gap-2'>
             {renderStars(rating)}
-          </div>
+          </div> */}
         </div>
       </div>
       <hr className="mt-5 border-2 w-full bg-black" />
@@ -51,6 +51,8 @@ function ProfileCard({ name, active, usertype, rating, designation, address, edu
           education={education}
           workExperience={workExperience}
           testimonials={testimonials}
+          techStack={techStack}
+          
         />
       </div>
     </div>

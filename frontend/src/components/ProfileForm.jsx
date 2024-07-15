@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const ProfileForm = () => {
@@ -103,9 +104,10 @@ const ProfileForm = () => {
     setProfile({ ...profile, workExperience: newWorkExperience });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Add submit logic here (e.g., sending data to a server)
+    const response = await axios.post("http://localhost:3001/api/new-profile",profile);
     console.log(profile);
   };
 

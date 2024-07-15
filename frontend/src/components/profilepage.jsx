@@ -1,36 +1,73 @@
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 
+function ProfilePage({ filters }) {
+  const [profiles, setProfiles] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-function Profilepage() {
-  const [profile, setProfile] = useState([]);
-  
-  useEffect(()=>{
-    const fetch = async()=>{
-    const res= await axios.get("http://localhost:3001/post");
-    console.log(res.data);
-    setProfile(res.data);
-    }
-    fetch();
-  },[])
-  
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const res = await axios.get("http://localhost:3001/post");
+        setProfiles(res.data);
+      } catch (error) {
+        console.error("Error fetching profiles:", error);
+      }
+    };
+    fetchProfiles();
+  }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredProfiles = profiles.filter((profile) => {
+    const query = searchQuery.toLowerCase();
+    const nameMatch = profile.name.toLowerCase().includes(query);
+    const designationMatch = profile.designation.toLowerCase().includes(query);
+    const addressMatch = profile.address.city.toLowerCase().includes(query);
+
+    const experienceMatch = !filters.experience.length || filters.experience.includes(profile.experience);
+    const skillsMatch = !filters.skills.length || filters.skills.some(skill => profile.skills.includes(skill));
+    const educationMatch = !filters.education.length || filters.education.includes(profile.education);
+
+    return (nameMatch || designationMatch || addressMatch) && experienceMatch && skillsMatch && educationMatch;
+  });
+
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <section className="w-full bg-white p-4 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
-          <input type="text" placeholder="Search by College, City or Name..." className="w-3/4 px-8 py-2 border rounded-full focus:outline-none" />
+          <input
+            type="text"
+            placeholder="Search by College, City or Name..."
+            className="w-3/4 px-8 py-2 border rounded-full focus:outline-none"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
           <button className="px-16 py-2 mr-2 bg-blue-600 text-white rounded-full">Find Profiles</button>
         </div>
         <div className="flex gap-6 overflow-auto h-[550px]">
-          {profile.map((item,index) => (
+          {filteredProfiles.map((profile, index) => (
             <div key={index}>
-              <ProfileCard name = {item.name} active = {item.active} usertype={item.usertype} rating ={item.user_rating} designation={item.designation} address={item.address} testimonials={item.testimonials} education={item.education}/>
+              <ProfileCard
+                name={profile.name}
+                active={profile.active}
+                usertype={profile.usertype}
+                rating={profile.user_rating}
+                designation={profile.designation}
+                address={profile.address}
+                testimonials={profile.testimonials}
+                education={profile.education}
+                techStack={profile.techStack}
+              />
             </div>
           ))}
         </div>
       </section>
     </div>
-  )
+  );
 }
-export default Profilepage;
+
+export default ProfilePage;
