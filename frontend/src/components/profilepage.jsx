@@ -25,7 +25,7 @@ function Profilepage() {
         <div className="flex gap-6 overflow-auto h-[550px]">
           {profile.map((item,index) => (
             <div key={index}>
-              <ProfileCard name = {item.name} active = {item.active} usertype={item.usertype} rating ={item.user_rating} designation={item.designation} address={item.address} testimonials={item.testimonials}/>
+              <ProfileCard name = {item.name} active = {item.active} usertype={item.usertype} rating ={item.user_rating} designation={item.designation} address={item.address} testimonials={item.testimonials} education={item.education}/>
             </div>
           ))}
         </div>
