@@ -25,8 +25,8 @@ function ProfileCard({ name, active, usertype, rating, designation, address, edu
     );
   };
 
-   const defaulteducation = education || [];
-   const defaultworkExperience = workExperience || [];
+  //  const defaulteducation = education || [];
+  //  const defaultworkExperience = workExperience || [];
   return (
     <div className="bg-gray-50 w-[300px] h-auto py-3 flex flex-col justify-center items-center rounded-lg shadow-md border-2 ">
       <div className='flex flex-col items-center cursor-pointer '>
@@ -48,8 +48,8 @@ function ProfileCard({ name, active, usertype, rating, designation, address, edu
           rating={rating}
           designation={designation}
           address={address}
-          education={defaulteducation}
-          workExperience={defaultworkExperience}
+          education={education}
+          workExperience={workExperience}
           testimonials={testimonials}
         />
       </div>
