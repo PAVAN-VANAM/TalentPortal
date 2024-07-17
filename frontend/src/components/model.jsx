@@ -30,30 +30,35 @@ const Models = ({ name, rating, designation, address, education = [],techStack, 
       <Button onPress={onOpen} className="bg-gray-50 text-primary-600">
         View Profile
       </Button>
-      <Modal className="absolute right-0 h-full bg-white rounded-none translate-x-7 " isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal className="absolute right-0 w-[900px] h-full bg-white rounded-none translate-x-7 " isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex gap-1">Profile Details</ModalHeader>
+              <h1 className="flex gap-1 text-xl font-bold m-4">Profile Details</h1>
               <ModalBody>
-                <div className="flex justify-around items-center text-xl">
-                  <img src="https://randomuser.me/api/portraits/women/2.jpg" className="rounded-full w-24" alt="Profile" />
+                <div className="flex justify-around items-center text-xl mt-6">
+                  <img src="https://randomuser.me/api/portraits/women/2.jpg" className="rounded-full w-36" alt="Profile" />
                   <div>
-                  <h4 className="text-xl font-bold">{name}</h4>
-                  <h4 className="text-xs flex gap-2 items-center text-gray-600"><span><FaBriefcase /></span>{designation}</h4>
-                  <h2 className="text-xs flex items-center gap-2 text-gray-600"><span><FaMapMarkerAlt /></span>{address.city}</h2>
+                  <h4 className="text-2xl font-bold">{name}</h4>
+                  <h4 className="text-base flex gap-2 items-center text-gray-600"><span><FaBriefcase /></span>{designation}</h4>
+                  <h2 className="text-base flex items-center gap-2 text-gray-600"><span><FaMapMarkerAlt /></span>{address.city}</h2>
                   <div className="flex items-center gap-2">
                     {renderStars(rating)}
                   </div>
+                  <button className='border border-cyan-800 text-lg rounded-xl shadow mt-4 p-1 flex flex-row justify-center item-center gap-3'>
+                  <img src="https://www.svgrepo.com/show/75820/linkedin.svg" alt="linkedin image" className='pt-1 flex flex-row justify-center item-center w-[24px]' />
+                  <div className='pt-1 flex flex-row justify-center items-center'>LinkedIn</div>
+                  </button>
                   </div>
                 </div>
-                <hr className="mt-5 border-1 bg-black" />
+                <hr className="mt-5 border-1" />
                 <div className="mt-2">
-                  <h4 className="text-md font-semibold">Education</h4>
+                  <h4 className="text-lg font-semibold">Education</h4>
                   {education.length > 0 ? (
                     education.map((edu, index) => (
-                      <div key={index} className="text-xl flex gap-2 justify-center h-12 items-center bg-gray-300 text-gray-900">
-                        <span ><FaSchool /></span>{edu.instituteName} -<span><FaGraduationCap/></span> {edu.courseName}
+                      <div key={index} className="text-xl flex gap-2 justify-start h-12 items-center  text-gray-900">
+                        <span ><FaSchool /></span>{edu.instituteName}  - <span><FaGraduationCap/></span> {edu.courseName}
+                        
                       </div>
                     ))
                   ) : (
