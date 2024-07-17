@@ -15,6 +15,11 @@ const profileSchema = new mongoose.Schema({
     country: { type: String, required: true },
   },
   yearsOfExperience: { type: Number, required: true },
+  type: {
+    type: String,
+    enum: ["STUDENT", "ALUMNI"],
+    required: true,
+  },
   education: [
     {
       instituteName: { type: String, required: true },
@@ -32,7 +37,7 @@ const profileSchema = new mongoose.Schema({
     },
   ],
   user_rating: { type: Number },
-  testimonials: { type: String, required: true },
+  testimonials: { type: String },
   techStack: [{ type: String, required: true }],
   reviews: { type: String },
   workExperience: [

@@ -24,6 +24,7 @@ router.post("/api/new-profile", async (req, res) => {
       designation,
       address,
       yearsOfExperience,
+      type,
       education,
       socialMediaProfiles,
       user_rating,
@@ -38,6 +39,7 @@ router.post("/api/new-profile", async (req, res) => {
       designation,
       address,
       yearsOfExperience,
+      type,
       education,
       socialMediaProfiles,
       user_rating,
@@ -83,11 +85,12 @@ router.get("/file/:filename", (req, res) => {
 
 // Data Of Profiles
 
-router.get("/post", async (req, res) => {
+router.get("/profiles", async (req, res) => {
   try {
-    // Fetch all users from the database using the User model
-    const profiles = await Profile.find();
-
+    // Fetch all users from the database using the Profile model
+    console.log(req.query);
+    const profiles = await Profile.find(req.query);
+    console.log(profiles);
     // Send the users as a response in JSON format
     res.json(profiles);
   } catch (error) {

@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 
-function ProfilePage({ filters }) {
+function ProfilePage({ alumni }) {
   const [profiles, setProfiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/post");
+        const res = await axios.get("http://localhost:3001/profiles", {
+          params: { type: alumni },
+        });
         setProfiles(res.data);
       } catch (error) {
         console.error("Error fetching profiles:", error);
       }
     };
     fetchProfiles();
-  }, []);
+  }, [alumni]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -28,11 +29,7 @@ function ProfilePage({ filters }) {
     const designationMatch = profile.designation.toLowerCase().includes(query);
     const addressMatch = profile.address.city.toLowerCase().includes(query);
 
-    const experienceMatch = !filters.experience.length || filters.experience.includes(profile.experience);
-    const skillsMatch = !filters.skills.length || filters.skills.some(skill => profile.skills.includes(skill));
-    const educationMatch = !filters.education.length || filters.education.includes(profile.education);
-
-    return (nameMatch || designationMatch || addressMatch) && experienceMatch && skillsMatch && educationMatch;
+    return nameMatch || designationMatch || addressMatch;
   });
 
   return (
@@ -46,9 +43,11 @@ function ProfilePage({ filters }) {
             value={searchQuery}
             onChange={handleSearchChange}
           />
-          <button className="px-16 py-2 mr-2 bg-blue-600 text-white rounded-full">Find Profiles</button>
+          <button className="px-16 py-2 mr-2 bg-blue-600 text-white rounded-full">
+            Find Profiles
+          </button>
         </div>
-        <div className="flex gap-6 overflow-auto h-[550px]">
+        <div className="flex gap-6 overflow-auto h-[550px] md:flex-wrap">
           {filteredProfiles.map((profile, index) => (
             <div key={index}>
               <ProfileCard
