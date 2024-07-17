@@ -169,6 +169,18 @@ const Dashboard = () => {
           <section className="flex">
             <aside className="w-full bg-white p-8 rounded-lg shadow-md">
               <input type="text" id="filterInput" className="border rounded-xl px-2 py-1 mb-5" placeholder="Filter by" />
+
+              <div className="mb-4">
+                <h4 className="text-gray-700">Experience</h4>
+                <div className="flex flex-col space-y-2">
+                  <label className="flex items-center space-x-2">
+                    <input type="checkbox" className="form-checkbox" onChange={() => handleFilterChange('ALUMNI', 'Student')} />
+                    <span>Connect with ALUMNI</span>
+                  </label>
+                  
+                </div>
+              </div>
+
               <div className="mb-4">
                 <h4 className="text-gray-700">Experience</h4>
                 <div className="flex flex-col space-y-2">
