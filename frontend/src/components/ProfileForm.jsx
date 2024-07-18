@@ -1,50 +1,58 @@
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
 
 const ProfileForm = () => {
   const [profile, setProfile] = useState({
-    name: '',
-    designation: '',
+    name: "",
+    designation: "",
     address: {
-      houseNo: '',
-      street: '',
-      addressLineOne: '',
-      addressLineTwo: '',
-      pincode: '',
-      district: '',
-      city: '',
-      state: '',
-      country: '',
+      houseNo: "",
+      street: "",
+      addressLineOne: "",
+      addressLineTwo: "",
+      pincode: "",
+      district: "",
+      city: "",
+      state: "",
+      country: "",
     },
-    yearsOfExperience: '',
-    education: [{
-      instituteName: '',
-      courseName: '',
-      branch: '',
-      yearOfPassing: '',
-      grade: '',
-    }],
-    socialMediaProfiles: [{
-      linkedIn: '', 
-      Github: '', 
-      emailId: '' 
-    }],
-    user_rating: '',
-    testimonials: '',
-    techStack: [''],
-    reviews: '',
-    workExperience: [{
-      companyName: '', 
-      startDate: '', 
-      endDate: '', 
-      designation: '', 
-      description: '' 
-    }],
+    yearsOfExperience: "",
+    type: "",
+    education: [
+      {
+        instituteName: "",
+        courseName: "",
+        branch: "",
+        yearOfPassing: "",
+        grade: "",
+      },
+    ],
+    socialMediaProfiles: [
+      {
+        linkedIn: "",
+        Github: "",
+        emailId: "",
+      },
+    ],
+    user_rating: "",
+    testimonials: "",
+    techStack: [""],
+    reviews: "",
+    workExperience: [
+      {
+        companyName: "",
+        startDate: "",
+        endDate: "",
+        designation: "",
+        description: "",
+      },
+    ],
     image: null,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const keys = name.split('.');
+    const keys = name.split(".");
     let newProfile = { ...profile };
 
     keys.reduce((acc, key, idx) => {
@@ -64,7 +72,13 @@ const ProfileForm = () => {
       ...prevProfile,
       education: [
         ...prevProfile.education,
-        { instituteName: '', courseName: '', branch: '', yearOfPassing: '', grade: '' },
+        {
+          instituteName: "",
+          courseName: "",
+          branch: "",
+          yearOfPassing: "",
+          grade: "",
+        },
       ],
     }));
   };
@@ -79,7 +93,7 @@ const ProfileForm = () => {
   const handleAddTechStack = () => {
     setProfile({
       ...profile,
-      techStack: [...profile.techStack, '']
+      techStack: [...profile.techStack, ""],
     });
   };
 
@@ -92,7 +106,16 @@ const ProfileForm = () => {
   const handleAddWorkExperience = () => {
     setProfile({
       ...profile,
-      workExperience: [...profile.workExperience, { companyName: '', startDate: '', endDate: '', designation: '', description: '' }]
+      workExperience: [
+        ...profile.workExperience,
+        {
+          companyName: "",
+          startDate: "",
+          endDate: "",
+          designation: "",
+          description: "",
+        },
+      ],
     });
   };
 
@@ -103,14 +126,22 @@ const ProfileForm = () => {
     setProfile({ ...profile, workExperience: newWorkExperience });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Add submit logic here (e.g., sending data to a server)
+    const response = await axios.post(
+      "http://localhost:3001/api/new-profile",
+      profile
+    );
     console.log(profile);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md" encType='multipart/form-data'>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md"
+      encType="multipart/form-data"
+    >
       <h2 className="text-2xl font-bold mb-6">Profile Form</h2>
 
       <div className="mb-4">
@@ -258,8 +289,22 @@ const ProfileForm = () => {
         />
       </div>
 
+      <div className="mb-4">
+        <label className="block text-gray-700">ProfileType:</label>
+        <input
+          type="text"
+          name="type"
+          value={profile.type}
+          onChange={handleChange}
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+        />
+      </div>
+
       <fieldset className="mb-4">
-        <legend className="text-lg font-semibold text-gray-700">Education</legend>
+        <legend className="text-lg font-semibold text-gray-700">
+          Education
+        </legend>
         {profile.education.map((edu, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700">Institute Name:</label>
@@ -267,7 +312,9 @@ const ProfileForm = () => {
               type="text"
               name={`education.${index}.instituteName`}
               value={edu.instituteName}
-              onChange={(e) => handleEducationChange(index, 'instituteName', e.target.value)}
+              onChange={(e) =>
+                handleEducationChange(index, "instituteName", e.target.value)
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
@@ -276,7 +323,9 @@ const ProfileForm = () => {
               type="text"
               name={`education.${index}.courseName`}
               value={edu.courseName}
-              onChange={(e) => handleEducationChange(index, 'courseName', e.target.value)}
+              onChange={(e) =>
+                handleEducationChange(index, "courseName", e.target.value)
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
@@ -285,7 +334,9 @@ const ProfileForm = () => {
               type="text"
               name={`education.${index}.branch`}
               value={edu.branch}
-              onChange={(e) => handleEducationChange(index, 'branch', e.target.value)}
+              onChange={(e) =>
+                handleEducationChange(index, "branch", e.target.value)
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
@@ -294,7 +345,9 @@ const ProfileForm = () => {
               type="number"
               name={`education.${index}.yearOfPassing`}
               value={edu.yearOfPassing}
-              onChange={(e) => handleEducationChange(index, 'yearOfPassing', e.target.value)}
+              onChange={(e) =>
+                handleEducationChange(index, "yearOfPassing", e.target.value)
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
@@ -303,7 +356,9 @@ const ProfileForm = () => {
               type="text"
               name={`education.${index}.grade`}
               value={edu.grade}
-              onChange={(e) => handleEducationChange(index, 'grade', e.target.value)}
+              onChange={(e) =>
+                handleEducationChange(index, "grade", e.target.value)
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             />
           </div>
@@ -372,7 +427,9 @@ const ProfileForm = () => {
       </div>
 
       <fieldset className="mb-4">
-        <legend className="text-lg font-semibold text-gray-700">Tech Stack</legend>
+        <legend className="text-lg font-semibold text-gray-700">
+          Tech Stack
+        </legend>
         {profile.techStack.map((tech, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700">Tech:</label>
@@ -406,7 +463,9 @@ const ProfileForm = () => {
       </div>
 
       <fieldset className="mb-4">
-        <legend className="text-lg font-semibold text-gray-700">Work Experience</legend>
+        <legend className="text-lg font-semibold text-gray-700">
+          Work Experience
+        </legend>
         {profile.workExperience.map((work, index) => (
           <div key={index} className="mb-4">
             <label className="block text-gray-700">Company Name:</label>
