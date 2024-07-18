@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 
+// eslint-disable-next-line react/prop-types
 function ProfilePage({ alumni }) {
   const [profiles, setProfiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

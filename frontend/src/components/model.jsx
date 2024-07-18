@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { FaBriefcase, FaMapMarkerAlt,FaGraduationCap, FaStar, FaStarHalf, FaSchool,FaTools } from 'react-icons/fa';
 
@@ -28,8 +28,9 @@ const Models = ({ name, rating, designation, address, education = [],techStack, 
   return (
     <>
       <Button onPress={onOpen} className="bg-gray-50 text-primary-600">
-        View Profile
+          View Profile &gt;
       </Button>
+
       <Modal className="absolute right-0 w-[900px] h-full bg-white rounded-none translate-x-7 " isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
