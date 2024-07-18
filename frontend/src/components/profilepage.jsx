@@ -12,6 +12,7 @@ function ProfilePage({ alumni }) {
         const res = await axios.get("http://localhost:3001/profiles", {
           params: { type: alumni },
         });
+        console.log(res.data);
         setProfiles(res.data);
       } catch (error) {
         console.error("Error fetching profiles:", error);
@@ -53,7 +54,7 @@ function ProfilePage({ alumni }) {
             <div key={index}>
               <ProfileCard
                 name={profile.name}
-                active={profile.active}
+                active={profile.type}
                 usertype={profile.usertype}
                 rating={profile.user_rating}
                 designation={profile.designation}

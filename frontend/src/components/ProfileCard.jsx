@@ -43,9 +43,9 @@ function ProfileCard({
   //  const defaulteducation = education || [];
   //  const defaultworkExperience = workExperience || [];
   return (
-    <div className="  bg-gray-50 w-[320px] h-full flex flex-col justify-center items-center rounded-lg shadow-md border-2 ">
+    <div className="  bg-gray-50 w-[320px] h-auto flex flex-col justify-center items-center rounded-lg shadow-md border-2 ">
       <div className="flex justify-around items-center text-xl mt-4  w-full px-4 ">
-        <div className="border-purple-900 border-4 rounded-full">
+        <div className={active==="ALUMNI" ? "border-4 border-purple-900 rounded-full" : "border-4 border-green-500 rounded-full"} >
           <img
             src="https://randomuser.me/api/portraits/women/2.jpg"
             className="rounded-full w-24 border-4  border-white-900"
