@@ -129,7 +129,7 @@ const Dashboard = () => {
               Get Connect with{" "}
             </h2>
             <h2 className=" text-blue-600 text-3xl font-bold ">
-              Top Companies
+              Scaler Alumni
             </h2>
           </div>
           <div className="flex items-center gap-36">
@@ -137,7 +137,7 @@ const Dashboard = () => {
               <img
                 src="https://th.bing.com/th/id/OIP.os6u16vK_wxVOkMopaXiVAHaHt?w=182&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7"
                 alt="doneimage"
-                className="pt-2 pr-4 w-[60px] h-[50px]"
+                className="pt-2 pr-4 w-[60px] h-[50px] "
               />
               <div className="flex flex-col">
                 <h2 className=" text-2xl font-bold">15LPA</h2>
@@ -156,13 +156,13 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center">
-              <h2 className=" text-2xl font-bold">Highly Rated</h2>
+              <h2 className=" text-2xl font-bold">Average Rating</h2>
               <img
                 src="https://westsidehaircare.com/wp-content/uploads/2020/09/5stars-495x95.gif"
                 alt="doneimage"
                 className="pt-2 pr-4 w-[150px] h-[30px]"
               />
-              <h2 className=" text-lg text-gray-700"> for Students</h2>
+              <h2 className=" text-lg text-gray-600"> based on 4,292 ratings</h2>
             </div>
           </div>
         </section>

@@ -41,7 +41,7 @@ function ProfilePage({ alumni }) {
           <input
             type="text"
             placeholder="Search by College, City or Name..."
-            className="w-3/4 px-8 py-2 border rounded-full focus:outline-none"
+            className="w-3/4 px-8 py-2 border rounded-medium focus:outline-none"
             value={searchQuery}
             onChange={handleSearchChange}
           />
